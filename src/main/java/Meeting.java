@@ -4,7 +4,7 @@ public class Meeting extends Task {
     private String start; //дата и время старта текстом.
 
 
-    public Meeting (int id, String topic, String project, String start) {
+    public Meeting(int id, String topic, String project, String start) {
         super(id); // вызов родительского конструктора
         this.topic = topic; // заполнение своих полей
         this.project = project;

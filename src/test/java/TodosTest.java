@@ -1,5 +1,3 @@
-
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +28,7 @@ public class TodosTest {
     }
 
     @Test
-    public void epicSearchAll () {
+    public void epicSearchAll() {
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
         Epic epic = new Epic(22, subtasks);
 
@@ -44,7 +42,7 @@ public class TodosTest {
     }
 
     @Test
-    public void meetingSearchAll () {
+    public void meetingSearchAll() {
         Meeting meeting = new Meeting(
                 555,
                 "Выкатка 3й версии приложения",
@@ -60,8 +58,9 @@ public class TodosTest {
         Task[] actual = todos.search("приложения");
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
-    public void simpleTaskSearchAll () {
+    public void simpleTaskSearchAll() {
         SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
 
         Todos todos = new Todos();
@@ -72,4 +71,40 @@ public class TodosTest {
         Task[] actual = todos.search("родителям");
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void allTaskSearch() {
+        String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
+        Epic epic = new Epic(22, subtasks);
+
+        SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
+
+        Meeting meeting = new Meeting(
+                555,
+                "Выкатка 3й версии приложения",
+                "Приложение НетоБанка",
+                "Во вторник после обеда"
+        );
+
+        Todos todos = new Todos();
+
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {epic};
+        Task[] actual = todos.search("Хлеб");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void NotOneTaskSearch() {
+        Todos todos = new Todos();
+
+        Task[] expected = {};
+        Task[] actual = todos.search("Хлеб");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+
 }
